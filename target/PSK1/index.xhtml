@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+<h:head/>
+<h:body>
+    <h2>Albums:</h2>
+    <ol>
+        <ui:repeat value="#{albums.allAlbums}" var="album">
+            <li >
+
+                <h:form>
+                    <h:link value="#{album.name} Price: #{album.price} " outcome="albums?albumId=#{album.id}" />
+                    <h:commandButton value="remove"
+                                     action="#{albums.removeAlbum(album)}"
+                    >
+                    </h:commandButton>
+                </h:form>
+            </li>
+        </ui:repeat>
+    </ol>
+    <h:form>
+        <label>Name</label>
+        <h:inputText value="#{albums.albumToCreate.name}" required="true" />
+        <label>Price</label>
+        <h:inputText value="#{albums.albumToCreate.price}" required="true" />
+        <h:commandButton value="Add new album" action="#{albums.createAlbum}" />
+    </h:form>
+    <h2>Orders:</h2>
+    <ol>
+        <ui:repeat value="#{orders.allOrders}" var="order">
+            <li>
+                <h:form>
+                    <h:link value="Order id: #{order.id}  Order date: #{order.date}"  outcome="orderPage?orderId=#{order.id}" />
+                    <h:commandButton value="Remove"
+                                     action="#{orders.removeOrder(order)}"
+                    >
+                    </h:commandButton>
+                </h:form>
+                </li>
+        </ui:repeat>
+    </ol>
+    <h:form>
+        <h:commandButton value="Add new order" action="#{orders.createOrder}" />
+    </h:form>
+</h:body>
+</html>
