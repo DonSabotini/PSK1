@@ -1,13 +1,11 @@
 package mybatis.model;
 
-import lombok.Getter;
-import lombok.Setter;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
+
 public class Album {
     /**
      *
@@ -34,7 +32,7 @@ public class Album {
      *
      * @mbg.generated Mon May 02 19:03:51 EEST 2022
      */
-    private String price;
+    private Double price;
 
 
     /**
@@ -93,7 +91,7 @@ public class Album {
      *
      * @mbg.generated Mon May 02 19:03:51 EEST 2022
      */
-    public String getPrice() {
+    public Double getPrice() {
         return price;
     }
 
@@ -107,7 +105,7 @@ public class Album {
      *
      * @mbg.generated Mon May 02 19:03:51 EEST 2022
      */
-    public void setPrice(String price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

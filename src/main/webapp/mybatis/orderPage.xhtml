@@ -29,7 +29,7 @@
     <ol>
         <ui:repeat value="#{albumsMyBatis.allAlbums}" var="_album">
             <li >
-                <h:link value="ID: #{_album.id} Name: #{_album.name} Price: #{_album.orders} " outcome="albums?albumId=#{_album.id}" />
+                <h:link value="ID: #{_album.id} Name: #{_album.name} Price: #{_album.price} " outcome="albums?albumId=#{_album.id}" />
                 <h:form>
                     <h:commandButton value="Add album"
                                      action="#{albumsInOrderMyBatis.addToOrder(_album)}"

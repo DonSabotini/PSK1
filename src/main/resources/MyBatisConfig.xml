@@ -5,6 +5,8 @@
 <configuration>
     <typeAliases>
         <typeAlias type="mybatis.model.Album" alias="Album"/>
+        <typeAlias type="mybatis.model.Myorder" alias="Myorder"/>
+        <typeAlias type="mybatis.model.Song" alias="Song"/>
     </typeAliases>
     <environments default="development">
         <environment id="development">

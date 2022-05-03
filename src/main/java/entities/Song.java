@@ -21,7 +21,7 @@ public class Song implements Serializable {
     private Integer id;
 
     @Size(max = 50)
-    @Column(name = "NAME")
+    @Column(name = "NAME",unique=true,nullable = false)
     private String name;
 
     @ManyToOne()
@@ -44,4 +44,6 @@ public class Song implements Serializable {
     public int hashCode() {
         return Objects.hash(id, name);
     }
+
+
 }

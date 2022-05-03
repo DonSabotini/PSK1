@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @NamedQueries({
@@ -26,6 +27,7 @@ public class Order implements Serializable {
 
     @Column(name = "DATE")
     private Date date;
+
     public Order() {
     }
 
@@ -36,5 +38,19 @@ public class Order implements Serializable {
             joinColumns = @JoinColumn(name = "ORDER_ID"),
             inverseJoinColumns = @JoinColumn(name = "ALBUM_ID"))
     private List<Album> albums = new ArrayList<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return Objects.equals(id, order.id) &&
+                Objects.equals(date, order.date);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, date);
+    }
 
 }

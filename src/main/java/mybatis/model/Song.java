@@ -2,9 +2,7 @@ package mybatis.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import mybatis.model.Album;
-@Getter
-@Setter
+
 public class Song {
     /**
      *
@@ -105,6 +103,7 @@ public class Song {
         this.albumId = albumId;
     }
 
+    // Added manually
     private Album album;
 
     public Album getAlbum() {

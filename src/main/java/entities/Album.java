@@ -23,17 +23,18 @@ public class Album implements Serializable {
     private Integer id;
 
     @Size(max = 50)
-    @Column(name = "NAME")
+    @Column(name = "NAME",unique=true,nullable = false)
     private String name;
 
-    @Column(name = "PRICE")
-    private String price;
+    @Column(name = "PRICE",nullable = true)
+    private double price;
 
     @OneToMany(mappedBy = "album", cascade = CascadeType.REMOVE)
     private List<Song> songs = new ArrayList<>();
 
     public Album() {
     }
+
     @ManyToMany(mappedBy = "albums")
     private List<Order> orders = new ArrayList<>();
 

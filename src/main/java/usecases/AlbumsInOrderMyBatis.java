@@ -39,7 +39,6 @@ public class AlbumsInOrderMyBatis implements Serializable {
 
         Integer orderId = Integer.parseInt(requestParameters.get("orderId"));
         this.order = orderMapper.selectByPrimaryKey(orderId);
-        System.out.println(order.getAlbums());
     }
 
     @Transactional

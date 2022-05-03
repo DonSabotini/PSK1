@@ -39,13 +39,13 @@ public class AlbumsInOrder implements Serializable {
     @Transactional
     public String addToOrder(Album album) {
         order.getAlbums().add(album);
-        orderDAO.persist(order);
+        orderDAO.update(order);
         return "orderPage.xhtml?orderId=" + order.getId() +"&faces-redirect=true";
     }
     @Transactional
     public String removeFromOrder(Album album) {
         order.getAlbums().remove(album);
-        orderDAO.persist(order);
+        orderDAO.update(order);
         return "orderPage.xhtml?orderId=" + order.getId() +"&faces-redirect=true";
     }
 

@@ -1,14 +1,12 @@
 package mybatis.model;
 
-import lombok.Getter;
-import lombok.Setter;
+
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Getter
-@Setter
+
 public class Myorder {
     /**
      *
@@ -72,6 +70,8 @@ public class Myorder {
      *
      * @mbg.generated Mon May 02 19:03:51 EEST 2022
      */
+
+    // Added manually
     public void setDate(Date date) {
         this.date = date;
     }

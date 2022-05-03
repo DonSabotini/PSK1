@@ -4,6 +4,7 @@ import java.util.List;
 import mybatis.model.Album;
 import org.mybatis.cdi.Mapper;
 
+
 @Mapper
 public interface AlbumMapper {
     /**

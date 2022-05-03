@@ -10,7 +10,7 @@
 
     <id column="ID" jdbcType="INTEGER" property="id" />
     <result column="NAME" jdbcType="VARCHAR" property="name" />
-    <result column="PRICE" jdbcType="VARCHAR" property="price" />
+    <result column="PRICE" jdbcType="DOUBLE" property="price" />
     <collection property="songs" javaType="ArrayList"
                 ofType="mybatis.model.Song" column="id"
                 select="selectSongsFromAlbum"/>
