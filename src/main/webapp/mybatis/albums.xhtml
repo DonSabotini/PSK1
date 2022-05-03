@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head/>
+<h:body>
+    <h1>MyBatis:</h1>
+    <h2>Songs in #{songsForAlbumMyBatis.album.name} album:</h2>
+    <ol>
+        <ui:repeat value="#{songsForAlbumMyBatis.album.songs}" var="song">
+            <li>
+
+                <h:form>
+                    <h:link value="#{song.name}"/>
+                    <h:commandButton value="Remove"
+                                     action="#{songsForAlbumMyBatis.removeSong(song)}"
+                    >
+                        <f:param name="albumId" value="#{songsForAlbumMyBatis.album.id}" />
+                    </h:commandButton>
+                </h:form>
+            </li>
+        </ui:repeat>
+    </ol>
+    <h:form>
+        <label>Name</label>
+        <h:inputText  value="#{songsForAlbumMyBatis.songToCreate.name}" required="true" />
+        <h:commandButton value="Add song to album"
+                         action="#{songsForAlbumMyBatis.createSong}"
+        >
+            <f:param name="albumId" value="#{songsForAlbumMyBatis.album.id}" />
+        </h:commandButton>
+    </h:form>
+    <h2>Album orders:</h2>
+    <ui:repeat value="#{songsForAlbumMyBatis.album.orders}" var="order">
+        <li>
+            <h:link value="ID: #{order.id} DATE: #{order.date} " outcome="orderPage?orderId=#{order.id}"/>
+        </li>
+    </ui:repeat>
+    <h2>Update album:</h2>
+    <h:form>
+        <label>Name</label>
+        <h:inputText  value="#{songsForAlbumMyBatis.album.name}" required="true" />
+        <label>Price</label>
+        <h:inputText  value="#{songsForAlbumMyBatis.album.price}" required="true" />
+        <h:commandButton value="Update"
+                         action="#{songsForAlbumMyBatis.updateAlbum}"
+        >
+            <f:param name="albumId" value="#{songsForAlbumMyBatis.album.id}" />
+        </h:commandButton>
+    </h:form>
+
+
+
+
+    <h:link outcome="index" value="Back to main page"/>
+</h:body>
+</html>

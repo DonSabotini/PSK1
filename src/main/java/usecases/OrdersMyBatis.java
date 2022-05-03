@@ -1,30 +1,31 @@
 package usecases;
 
 
-import entities.Order;
 import lombok.Getter;
 import lombok.Setter;
-import persistence.OrderDAO;
+import mybatis.dao.MyorderMapper;
+import mybatis.model.Myorder;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.sql.Date;
-
 import java.util.List;
 
 @Model
-public class Orders {
+public class OrdersMyBatis {
+
     @Inject
-    private OrderDAO orderDAO;
+    private MyorderMapper orderMapper;
 
-
-    @Getter @Setter
-    private Order orderToCreate = new Order();
 
     @Getter
-    private List<Order> allOrders;
+    @Setter
+    private Myorder orderToCreate = new Myorder();
+
+    @Getter
+    private List<Myorder> allOrders;
 
     @PostConstruct
     public void init(){
@@ -34,16 +35,17 @@ public class Orders {
     @Transactional
     public String createOrder(){
         orderToCreate.setDate(new Date(System.currentTimeMillis()));
-        this.orderDAO.persist(orderToCreate);
+        orderMapper.insert(orderToCreate);
         return "index?faces-redirect=true";
     }
     @Transactional
-    public String removeOrder(Order order){
-        orderDAO.remove(order);
+    public String removeOrder(Myorder order){
+        orderMapper.deleteFromOrderedAlbums(order.getId());
+        orderMapper.deleteByPrimaryKey(order.getId());
         return "index?faces-redirect=true";
     }
 
     private void loadAllAlbums(){
-        this.allOrders = orderDAO.loadAll();
+        this.allOrders = orderMapper.selectAll();
     }
 }

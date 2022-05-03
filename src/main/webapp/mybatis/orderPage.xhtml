@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head/>
+<h:body>
+    <h1>MyBatis:</h1>
+    <h2>Albums in order #{albumsInOrderMyBatis.order.id} (#{albumsInOrderMyBatis.order.date}):</h2>
+    <ol>
+        <ui:repeat value="#{albumsInOrderMyBatis.order.albums}" var="album">
+            <li>
+
+                <h:form>
+                    <h:link value="#{album.name}"  outcome="albums?albumId=#{album.id}"/>
+                    <h:commandButton value="Remove"
+                                     action="#{albumsInOrderMyBatis.removeFromOrder(album
+                                 )}"
+                    >
+                        <f:param name="orderId" value="#{albumsInOrderMyBatis.order.id}" />
+                    </h:commandButton>
+                </h:form>
+            </li>
+        </ui:repeat>
+    </ol>
+    <h2>Add albums to order:</h2>
+    <ol>
+        <ui:repeat value="#{albumsMyBatis.allAlbums}" var="_album">
+            <li >
+                <h:link value="ID: #{_album.id} Name: #{_album.name} Price: #{_album.orders} " outcome="albums?albumId=#{_album.id}" />
+                <h:form>
+                    <h:commandButton value="Add album"
+                                     action="#{albumsInOrderMyBatis.addToOrder(_album)}"
+                    >
+                        <f:param name="orderId" value="#{albumsInOrderMyBatis.order.id}" />
+                    </h:commandButton>
+                </h:form>
+            </li>
+        </ui:repeat>
+    </ol>
+    <h:link outcome="index" value="Back to main page"/>
+</h:body>
+</html>

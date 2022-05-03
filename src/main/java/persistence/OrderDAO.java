@@ -1,8 +1,6 @@
 package persistence;
 
-import entities.Album;
 import entities.Order;
-import entities.Song;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;

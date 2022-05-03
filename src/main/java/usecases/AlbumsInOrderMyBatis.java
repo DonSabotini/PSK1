@@ -1,12 +1,13 @@
 package usecases;
 
-import entities.Album;
-import entities.Order;
-import entities.Song;
+import mybatis.model.Album;
+import mybatis.model.Myorder;
+import mybatis.model.Song;
+
 import lombok.Getter;
 import lombok.Setter;
-import persistence.AlbumDAO;
-import persistence.OrderDAO;
+import mybatis.dao.AlbumMapper;
+import mybatis.dao.MyorderMapper;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
@@ -15,17 +16,21 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.Map;
+
 @Model
-public class AlbumsInOrder implements Serializable {
+public class AlbumsInOrderMyBatis implements Serializable {
     @Inject
-    private AlbumDAO albumDAO;
+    private AlbumMapper albumMapper;
 
     @Inject
-    private OrderDAO orderDAO;
+    private MyorderMapper orderMapper;
 
     @Getter
     @Setter
-    private Order order;
+    private Myorder order;
+
+    @Getter @Setter
+    private Song songToCreate = new Song();
 
     @PostConstruct
     public void init() {
@@ -33,21 +38,21 @@ public class AlbumsInOrder implements Serializable {
                 FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
 
         Integer orderId = Integer.parseInt(requestParameters.get("orderId"));
-        this.order = orderDAO.findOne(orderId);
+        this.order = orderMapper.selectByPrimaryKey(orderId);
+        System.out.println(order.getAlbums());
     }
 
     @Transactional
     public String addToOrder(Album album) {
-        order.getAlbums().add(album);
-        orderDAO.persist(order);
+
+        orderMapper.insertAlbumToOrder(order.getId(), album.getId());
         return "orderPage.xhtml?orderId=" + order.getId() +"&faces-redirect=true";
     }
     @Transactional
     public String removeFromOrder(Album album) {
-        order.getAlbums().remove(album);
-        orderDAO.persist(order);
+        orderMapper.deleteAlbumFromOrder(album);
+
+
         return "orderPage.xhtml?orderId=" + order.getId() +"&faces-redirect=true";
     }
-
-
 }

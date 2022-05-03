@@ -16,5 +16,7 @@
     </environments>
     <mappers>
         <mapper resource="mybatis.xml/AlbumMapper.xml"/>
+        <mapper resource="mybatis.xml/SongMapper.xml"/>
+        <mapper resource="mybatis.xml/MyorderMapper.xml"/>
     </mappers>
 </configuration>
